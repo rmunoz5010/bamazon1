@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 	user: 'root',
 
 	// Your password
-	password: '',
+	password: 'Rgm01011058?',
 	database: 'bamazon'
 });
 
@@ -21,14 +21,14 @@ function promptUserPurchase() {
 			type: 'input',
 			name: 'id',
 			message: 'Select an item ID',
-			validate: validateInput,
+
 			filter: Number
 		},
 		{
 			type: 'input',
 			name: 'quantity',
 			message: 'How many do you need?',
-			validate: validateInput,
+
 			filter: Number
 		}
 	]).then(function(input) {
@@ -53,11 +53,11 @@ function promptUserPurchase() {
 
 
 				// If the quantity requested by the user is in stock
-				if (quantity <= productData.stockquantity) {
+				if (quantity <= productData.stock) {
 					console.log('Congratulations, the product you requested is in stock! Placing order!');
 
 					// Construct the updating query string
-					var updateQueryStr = 'UPDATE products SET stock = ' + (productData.stock - quantity) + ' WHERE item_id = ' + item;
+					var updateQueryStr = 'UPDATE products SET stock = ' + (productData.stock - quantity) + ' WHERE id = ' + item;
 
 
 					// Update the inventory
